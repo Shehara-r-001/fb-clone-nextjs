@@ -24,4 +24,12 @@
   .header__iconMid {
     @apply h-6 w-6 cursor-pointer;
   }
+
+  .sidebar__item {
+    @apply flex items-center space-x-3 text-sm font-semibold pl-4 mt-5 cursor-pointer;
+  }
+
+  .sidebar__icon {
+    @apply w-6 h-6 group-hover:scale-110 duration-200;
+  }
 }
