@@ -7,6 +7,7 @@ module.exports = {
       'img.icons8.com',
       'cdn.britannica.com',
       'i.pinimg.com',
+      'robohash.org',
     ],
   },
 };
