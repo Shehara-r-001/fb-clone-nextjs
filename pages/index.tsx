@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Stories from '../components/Stories';
 
 const Home: NextPage = () => {
   return (
@@ -15,9 +15,7 @@ const Home: NextPage = () => {
       <Header />
       <div>
         <Sidebar />
-        <div className='mt-[60px]'>
-          <Stories />
-        </div>
+        <Feed />
       </div>
     </div>
   );

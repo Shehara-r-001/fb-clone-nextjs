@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 const Sidebar = () => {
   return (
-    <div className='overflow-y-scroll pb-6 hidden md:flex md:flex-col w-[200px] lg:w-[250px] fixed left-0 top-[50px] h-[calc(100vh-50px)] scrollbar-thin hover:scrollbar-track-pink-dark hover:scrollbar-thumb-pink-dark-2 pr-2'>
+    <div className='overflow-y-scroll pb-6 hidden md:flex md:flex-col w-[240px] lg:w-[250px] fixed left-0 top-[50px] h-[calc(100vh-50px)] scrollbar-thin hover:scrollbar-track-pink-dark hover:scrollbar-thumb-pink-dark-2 pr-2'>
       <div>
         <div className='sidebar__item group'>
           <FaUserCircle className='sidebar__icon' />

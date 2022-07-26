@@ -8,6 +8,7 @@ module.exports = {
       'cdn.britannica.com',
       'i.pinimg.com',
       'robohash.org',
+      'avatars.githubusercontent.com',
     ],
   },
 };
