@@ -18,7 +18,7 @@ const Story = ({ data }: Props) => {
         />
         <div className='absolute top-2 left-1 rounded-full border-[3px] border-blue-700 flex items-center justify-center bg-sky-500/100 group-hover:scale-110 duration-200'>
           <Image
-            className='rounded-full '
+            className='rounded-full'
             src={data.profilePic}
             height={30}
             width={30}

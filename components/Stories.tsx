@@ -8,8 +8,8 @@ import { TiPlus } from 'react-icons/ti';
 const Stories = () => {
   return (
     <div>
-      <ScrollContainer className='flex items-center w-[100vw] overflow-x-scroll scrollbar-hide sm:w-[calc(80vw-90px)] sm:mx-auto md:w-[calc(100vw-340px)] md:ml-[280px] lg:ml-[320px] lg:w-[calc(100vw-640px)]'>
-        <div className='flex items-center space-x-2 px-2'>
+      <ScrollContainer className='flex items-center overflow-x-scroll scrollbar-hide w-full'>
+        <div className='flex items-center space-x-2 '>
           <div className='h-[200px] w-[120px] flex flex-col -mt-2 group cursor-pointer'>
             <Image
               src='https://avatars.githubusercontent.com/u/84827162?v=4'

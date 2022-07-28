@@ -32,4 +32,16 @@
   .sidebar__icon {
     @apply w-6 h-6 group-hover:scale-110 duration-200;
   }
+
+  .iconDiv {
+    @apply flex items-center space-x-2 text-xs sm:text-sm font-semibold my-4 cursor-pointer;
+  }
+
+  .inputCont__icon {
+    @apply h-5 w-5;
+  }
+
+  .inputCont__text {
+    @apply group-hover:underline;
+  }
 }
