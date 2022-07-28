@@ -44,4 +44,12 @@
   .inputCont__text {
     @apply group-hover:underline;
   }
+
+  .post__react {
+    @apply flex items-center space-x-2 text-xs;
+  }
+
+  .post__reactIcon {
+    @apply h-4 w-4;
+  }
 }

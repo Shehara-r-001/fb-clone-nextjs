@@ -1,5 +1,6 @@
 import React from 'react';
 import InputCont from './InputCont';
+import Post from './Post';
 import Stories from './Stories';
 
 const Feed = () => {
@@ -8,6 +9,7 @@ const Feed = () => {
       <Stories />
       <div className='px-10 sm:px-3 lg:px-10'>
         <InputCont />
+        <Post />
       </div>
     </div>
   );
