@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#0d0d0d] text-white;
+    @apply bg-[#0d0d0d] text-white scrollbar-hide;
   }
 }
 
@@ -51,5 +51,13 @@
 
   .post__reactIcon {
     @apply h-4 w-4;
+  }
+
+  .comment__react {
+    @apply cursor-pointer hover:underline;
+  }
+
+  .comment_options {
+    @apply h-4 w-4 text-[#ccc];
   }
 }

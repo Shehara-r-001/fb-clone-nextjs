@@ -24,7 +24,7 @@ const Stories = () => {
                 Create a story
               </h1>
 
-              <TiPlus className='bg-blue-600 h-6 w-6 p-1 rounded-full absolute -top-3 left-[calc(60px-12px)] group-hover:scale-110 duration-300' />
+              <TiPlus className='bg-blue-600 h-7 w-7 p-1 rounded-full absolute -top-3 left-[calc(60px-14px)] group-hover:scale-110 duration-300 border-2 border-[#333]' />
             </div>
           </div>
           {DATA.map((data) => (

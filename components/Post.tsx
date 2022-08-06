@@ -8,10 +8,11 @@ import {
 } from 'react-icons/bi';
 import { FaThumbsUp, FaRegThumbsUp, FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
+import CommentBox from './CommentBox';
 
 const Post = () => {
   return (
-    <div className='bg-[#1a1a1a] rounded-md my-4'>
+    <div className='bg-[#1a1a1a] rounded-md my-4 pb-1'>
       <div className='flex items-center px-3 py-2'>
         <BiUserCircle className='h-8 w-8' />
         <div className='mx-2 flex-1'>
@@ -41,7 +42,7 @@ const Post = () => {
           <p>1 share</p>
         </div>
       </div>
-      <div className='mx-2 border-b border-t border-[#404040] flex items-center justify-between py-2 px-5 text-[#ccc]'>
+      <div className='mx-2 border-b border-t border-[#404040] flex items-center justify-between py-2 px-5 text-[#ccc] font-semibold'>
         <div className='post__react'>
           <FaRegThumbsUp className='post__reactIcon' />
           <p>Like</p>
@@ -55,6 +56,7 @@ const Post = () => {
           <p>Share</p>
         </div>
       </div>
+      <CommentBox />
     </div>
   );
 };
