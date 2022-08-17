@@ -9,6 +9,7 @@ module.exports = {
       'i.pinimg.com',
       'robohash.org',
       'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com',
     ],
   },
 };

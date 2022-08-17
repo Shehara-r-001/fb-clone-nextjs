@@ -12,8 +12,10 @@ import { FaUserCircle } from 'react-icons/fa';
 import { AiTwotoneHome } from 'react-icons/ai';
 import { BiStoreAlt } from 'react-icons/bi';
 import { SiNintendogamecube } from 'react-icons/si';
+import { useSession } from 'next-auth/react';
 
 const Header = () => {
+  const { data: session } = useSession() as any;
   return (
     <div className='bg-[#1a1a1a] border-b border-t border-b-[#333333] border-t-[#333333] p-2 flex align-center justify-between fixed top-0 left-0 w-[100vw] z-50'>
       <div className='flex items-center space-x-1'>
@@ -55,7 +57,19 @@ const Header = () => {
           <HiBell className='header__icon -rotate-[30deg]' />
           <span className='header__notification'>9</span>
         </div>
-        <FaUserCircle className='header__icon' />
+        {session ? (
+          <div className='flex justify-center items-center'>
+            <Image
+              src={session.user?.image}
+              alt='fb'
+              height={30}
+              width={30}
+              className='header__icon'
+            />
+          </div>
+        ) : (
+          <FaUserCircle className='header__icon' />
+        )}
       </div>
     </div>
   );

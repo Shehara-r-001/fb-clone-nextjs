@@ -10,14 +10,30 @@ import { CgTimelapse } from 'react-icons/cg';
 import { BiChevronDown } from 'react-icons/bi';
 import { GiWorld } from 'react-icons/gi';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 const Sidebar = () => {
+  const { data: session } = useSession() as any;
   return (
     <div className='overflow-y-scroll pb-6 hidden md:flex md:flex-col w-[240px] lg:w-[250px] fixed left-0 top-[50px] h-[calc(100vh-50px)] scrollbar-thin hover:scrollbar-track-pink-dark hover:scrollbar-thumb-pink-dark-2 pr-2'>
       <div>
         <div className='sidebar__item group'>
-          <FaUserCircle className='sidebar__icon' />
-          <h1 className='sidebar__nameTag'>Username</h1>
+          {session ? (
+            <Image
+              src={session.user?.image}
+              alt='fb'
+              height={30}
+              width={30}
+              className='header__icon'
+            />
+          ) : (
+            <FaUserCircle className='sidebar__icon' />
+          )}
+          {session ? (
+            <h1 className='sidebar__nameTag'>{session.user.name}</h1>
+          ) : (
+            <h1 className='sidebar__nameTag'>user name</h1>
+          )}
         </div>
         <div className='sidebar__item group'>
           <FaUserFriends className='sidebar__icon text-cyan-400' />
