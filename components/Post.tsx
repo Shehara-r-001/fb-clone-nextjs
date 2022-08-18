@@ -1,16 +1,13 @@
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
-import {
-  BiUserCircle,
-  BiWorld,
-  BiDotsHorizontalRounded,
-  BiLike,
-} from 'react-icons/bi';
+import { BiUserCircle, BiWorld, BiDotsHorizontalRounded } from 'react-icons/bi';
 import { FaThumbsUp, FaRegThumbsUp, FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import CommentBox from './CommentBox';
 
 const Post = () => {
+  const { data: session } = useSession() as any;
   return (
     <div className='bg-[#1a1a1a] rounded-md my-4 pb-1'>
       <div className='flex items-center px-3 py-2'>
@@ -42,20 +39,22 @@ const Post = () => {
           <p>1 share</p>
         </div>
       </div>
-      <div className='mx-2 border-b border-t border-[#404040] flex items-center justify-between py-2 px-5 text-[#ccc] font-semibold'>
-        <div className='post__react'>
-          <FaRegThumbsUp className='post__reactIcon' />
-          <p>Like</p>
+      {session && (
+        <div className='mx-2 border-b border-t border-[#404040] flex items-center justify-between py-2 px-5 text-[#ccc] font-semibold'>
+          <div className='post__react'>
+            <FaRegThumbsUp className='post__reactIcon' />
+            <p>Like</p>
+          </div>
+          <div className='post__react'>
+            <FaRegCommentAlt className='post__reactIcon' />
+            <p>Comment</p>
+          </div>
+          <div className='post__react'>
+            <RiShareForwardLine className='post__reactIcon' />
+            <p>Share</p>
+          </div>
         </div>
-        <div className='post__react'>
-          <FaRegCommentAlt className='post__reactIcon' />
-          <p>Comment</p>
-        </div>
-        <div className='post__react'>
-          <RiShareForwardLine className='post__reactIcon' />
-          <p>Share</p>
-        </div>
-      </div>
+      )}
       <CommentBox />
     </div>
   );

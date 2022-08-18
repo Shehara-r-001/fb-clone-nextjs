@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BsSearch,
   BsMessenger,
@@ -12,10 +12,19 @@ import { FaUserCircle } from 'react-icons/fa';
 import { AiTwotoneHome } from 'react-icons/ai';
 import { BiStoreAlt } from 'react-icons/bi';
 import { SiNintendogamecube } from 'react-icons/si';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Header = () => {
   const { data: session } = useSession() as any;
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.push('/auth/signin');
+  //   }
+  // }, [router, session]);
+
   return (
     <div className='bg-[#1a1a1a] border-b border-t border-b-[#333333] border-t-[#333333] p-2 flex align-center justify-between fixed top-0 left-0 w-[100vw] z-50'>
       <div className='flex items-center space-x-1'>
@@ -65,10 +74,14 @@ const Header = () => {
               height={30}
               width={30}
               className='header__icon'
+              onClick={() => signOut({ callbackUrl: '/auth/signin' })}
             />
           </div>
         ) : (
-          <FaUserCircle className='header__icon' />
+          <FaUserCircle
+            className='header__icon'
+            onClick={() => router.push('/auth/signin')}
+          />
         )}
       </div>
     </div>
