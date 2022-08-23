@@ -1,0 +1,1 @@
+save a user in the database when signing in if he is not already registered
