@@ -9,6 +9,7 @@ import Stories from './Stories';
 const Feed = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
   return (
     <div className='mt-[60px] sm:w-[calc(80vw-90px)] sm:mx-auto md:w-[calc(100vw-340px)] md:ml-[280px] lg:ml-[320px] lg:w-[calc(100vw-640px)] px-2'>
       <Stories />

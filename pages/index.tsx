@@ -3,8 +3,34 @@ import Head from 'next/head';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { gql, useQuery } from '@apollo/client';
+
+const GetAllPosts = gql`
+  query getPosts {
+    posts {
+      id
+      caption
+      image
+      author {
+        id
+        name
+      }
+      comments {
+        id
+        desc
+      }
+      likes {
+        id
+      }
+    }
+  }
+`;
 
 const Home: NextPage = () => {
+  const { data, error, loading } = useQuery(GetAllPosts);
+  if (!loading) console.log(data);
+  if (error) console.log(error);
+
   return (
     <div className=''>
       <Head>
