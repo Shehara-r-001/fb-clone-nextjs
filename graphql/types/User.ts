@@ -1,4 +1,4 @@
-import { asNexusMethod, objectType } from 'nexus';
+import { asNexusMethod, extendType, objectType } from 'nexus';
 import { Post } from './Post';
 // import { DateTimeResolver } from 'graphql-scalars';
 
@@ -21,6 +21,18 @@ export const User = objectType({
             },
           })
           .posts();
+      },
+    });
+  },
+});
+
+export const UsersQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.field('getAllUsers', {
+      type: 'User',
+      async resolve(_parent, _args, context) {
+        return await context.prisma.user.findMany();
       },
     });
   },

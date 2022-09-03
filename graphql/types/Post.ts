@@ -1,4 +1,10 @@
-import { asNexusMethod, nonNull, objectType, stringArg } from 'nexus';
+import {
+  asNexusMethod,
+  extendType,
+  nonNull,
+  objectType,
+  stringArg,
+} from 'nexus';
 import { Comment } from './Comment';
 import { User } from './User';
 import { Like } from './Like';
@@ -12,6 +18,7 @@ export const Post = objectType({
   definition(t) {
     t.string('id');
     t.string('caption');
+    t.string('createdAt');
     t.nullable.string('image');
     t.field('author', {
       type: User,
@@ -47,6 +54,32 @@ export const Post = objectType({
             },
           })
           .likes();
+      },
+    });
+  },
+});
+
+export const PostsQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.field('getAllPosts', {
+      type: 'Post',
+      async resolve(_parent, _args, context) {
+        return await context.prisma.post.findMany();
+      },
+    });
+
+    t.field('getPostById', {
+      type: 'Post',
+      args: {
+        userId: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, context) {
+        return await context.prisma.post.findMany({
+          where: {
+            userId: args.userId,
+          },
+        });
       },
     });
   },

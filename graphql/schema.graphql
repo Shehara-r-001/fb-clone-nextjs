@@ -16,13 +16,16 @@ type Post {
   author: User
   caption: String
   comments: [Comment]
+  createdAt: String
   id: String
   image: String
   likes: [Like]
 }
 
 type Query {
-  ok: Boolean!
+  getAllPosts: [Post]!
+  getAllUsers: [User]!
+  getPostById(userId: String!): Post
 }
 
 type User {

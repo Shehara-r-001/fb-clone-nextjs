@@ -6,10 +6,11 @@ import Sidebar from '../components/Sidebar';
 import { gql, useQuery } from '@apollo/client';
 
 const GetAllPosts = gql`
-  query getPosts {
+  query getAllPosts {
     posts {
       id
       caption
+      createAt
       image
       author {
         id
@@ -27,8 +28,10 @@ const GetAllPosts = gql`
 `;
 
 const Home: NextPage = () => {
-  const { data, error, loading } = useQuery(GetAllPosts);
-  if (!loading) console.log(data);
+  const { data, error, loading } = useQuery(GetAllPosts, {
+    onCompleted: (data) => console.log(data),
+  });
+  // if (!loading) console.log(data);
   if (error) console.log(error);
 
   return (
