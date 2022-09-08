@@ -3,35 +3,12 @@ import Head from 'next/head';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { gql, useQuery } from '@apollo/client';
-
-const GetAllPosts = gql`
-  query getAllPosts {
-    posts {
-      id
-      caption
-      createAt
-      image
-      author {
-        id
-        name
-      }
-      comments {
-        id
-        desc
-      }
-      likes {
-        id
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GetAllPosts } from '../graphql/queries';
 
 const Home: NextPage = () => {
-  const { data, error, loading } = useQuery(GetAllPosts, {
-    onCompleted: (data) => console.log(data),
-  });
-  // if (!loading) console.log(data);
+  const { data, error, loading } = useQuery(GetAllPosts);
+  if (!loading) console.log(data);
   if (error) console.log(error);
 
   return (

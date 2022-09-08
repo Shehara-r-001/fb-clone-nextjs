@@ -69,7 +69,7 @@ export const PostsQuery = extendType({
       },
     });
 
-    t.field('getPostById', {
+    t.field('getPostByID', {
       type: 'Post',
       args: {
         userId: nonNull(stringArg()),
