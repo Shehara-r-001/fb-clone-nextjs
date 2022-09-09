@@ -14,30 +14,30 @@ type Provider = {
   };
 };
 
-// interface Post {
-//   id: string;
-//   caption: string;
-//   createdAt: string;
-//   image: string;
-//   author: Author;
-//   comments: Comment[];
-//   likes: Like[];
-// }
+interface IPost {
+  id: string;
+  caption: string;
+  createdAt: string;
+  image: string;
+  author: IAuthor;
+  comments: IComment[];
+  likes: ILike[];
+}
 
-// interface Author {
-//   id: string;
-//   name: string;
-//   image: string;
-//   email: string;
-//   createdAt: string;
-// }
+interface IAuthor {
+  id: string;
+  name: string;
+  image: string;
+  email: string;
+  createdAt: string;
+}
 
-// interface Comment {
-//   id: string;
-//   desc: string;
-//   createdAt: string;
-// }
+interface IComment {
+  id: string;
+  desc: string;
+  createdAt: string;
+}
 
-// interface Like {
-//   id: string;
-// }
+interface ILike {
+  id: string;
+}

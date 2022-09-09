@@ -14,6 +14,7 @@ export const GetAllPosts = gql`
       comments {
         id
         desc
+        createdAt
       }
       likes {
         id

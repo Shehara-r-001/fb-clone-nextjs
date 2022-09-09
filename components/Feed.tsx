@@ -13,7 +13,7 @@ const Feed = () => {
   const router = useRouter();
 
   const { data, error, loading } = useQuery(GetAllPosts);
-  if (!loading) console.log(data);
+  if (loading) return <h1>loading</h1>;
   if (error) console.log(JSON.stringify(error));
 
   return (
@@ -34,7 +34,10 @@ const Feed = () => {
             </button>
           </div>
         )}
-        <Post />
+        {!loading &&
+          data?.getAllPosts.map((post: IPost) => (
+            <Post key={post?.id} post={post} />
+          ))}
       </div>
     </div>
   );
