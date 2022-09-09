@@ -9,6 +9,7 @@ export const Comment = objectType({
   definition(t) {
     t.string('id');
     t.string('desc');
+    t.string('createdAt');
     t.field('author', {
       type: User,
       async resolve(parent, _args, context) {

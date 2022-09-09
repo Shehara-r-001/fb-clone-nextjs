@@ -1,16 +1,7 @@
-import {
-  asNexusMethod,
-  extendType,
-  nonNull,
-  objectType,
-  stringArg,
-} from 'nexus';
+import { extendType, nonNull, objectType, stringArg } from 'nexus';
 import { Comment } from './Comment';
 import { User } from './User';
 import { Like } from './Like';
-// import { DateTimeResolver } from 'graphql-scalars';
-
-// export const GQLDate = asNexusMethod(DateTimeResolver, 'date');
 
 export const Post = objectType({
   name: 'Post',
@@ -64,8 +55,8 @@ export const PostsQuery = extendType({
   definition(t) {
     t.nonNull.list.field('getAllPosts', {
       type: 'Post',
-      async resolve(_parent, _args, context) {
-        return await context.prisma.post.findMany();
+      resolve(_parent, _args, context) {
+        return context.prisma.post.findMany();
       },
     });
 
@@ -74,8 +65,8 @@ export const PostsQuery = extendType({
       args: {
         userId: nonNull(stringArg()),
       },
-      async resolve(_parent, args, context) {
-        return await context.prisma.post.findMany({
+      resolve(_parent, args, context) {
+        return context.prisma.post.findMany({
           where: {
             userId: args.userId,
           },

@@ -1,7 +1,9 @@
+import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BsCaretLeft } from 'react-icons/bs';
+import { GetAllPosts } from '../graphql/queries';
 import InputCont from './InputCont';
 import Post from './Post';
 import Stories from './Stories';
@@ -9,6 +11,10 @@ import Stories from './Stories';
 const Feed = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
+  const { data, error, loading } = useQuery(GetAllPosts);
+  if (!loading) console.log(data);
+  if (error) console.log(JSON.stringify(error));
 
   return (
     <div className='mt-[60px] sm:w-[calc(80vw-90px)] sm:mx-auto md:w-[calc(100vw-340px)] md:ml-[280px] lg:ml-[320px] lg:w-[calc(100vw-640px)] px-2'>

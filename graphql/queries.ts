@@ -1,8 +1,8 @@
-import { gql } from 'apollo-server-micro';
+import { gql } from '@apollo/client';
 
 export const GetAllPosts = gql`
   query getAllPosts {
-    posts {
+    getAllPosts {
       id
       caption
       createdAt

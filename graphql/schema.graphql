@@ -4,6 +4,7 @@
 
 type Comment {
   author: User
+  createdAt: String
   desc: String
   id: String
 }

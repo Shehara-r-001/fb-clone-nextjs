@@ -13,3 +13,31 @@ type Provider = {
     callbackUrl: string;
   };
 };
+
+// interface Post {
+//   id: string;
+//   caption: string;
+//   createdAt: string;
+//   image: string;
+//   author: Author;
+//   comments: Comment[];
+//   likes: Like[];
+// }
+
+// interface Author {
+//   id: string;
+//   name: string;
+//   image: string;
+//   email: string;
+//   createdAt: string;
+// }
+
+// interface Comment {
+//   id: string;
+//   desc: string;
+//   createdAt: string;
+// }
+
+// interface Like {
+//   id: string;
+// }
