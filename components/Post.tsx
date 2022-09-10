@@ -14,7 +14,6 @@ type Props = {
 const Post = ({ post }: Props) => {
   const { data: session } = useSession() as any;
 
-  // console.log(post);
   var date = new Date(parseInt(post.createdAt)).toISOString();
 
   return (
