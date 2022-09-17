@@ -10,6 +10,8 @@ module.exports = {
       'robohash.org',
       'avatars.githubusercontent.com',
       'lh3.googleusercontent.com',
+      'www.charitycomms.org.uk',
+      'res.cloudinary.com',
     ],
   },
 };
