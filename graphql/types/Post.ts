@@ -75,3 +75,28 @@ export const PostsQuery = extendType({
     });
   },
 });
+
+export const PostMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('createPost', {
+      type: 'Post',
+      args: {
+        caption: stringArg(),
+        image: stringArg(),
+        userId: stringArg(),
+        id: stringArg(),
+      },
+      resolve(_parent, args, context) {
+        return context.prisma.post.create({
+          data: {
+            caption: args.caption as any,
+            image: args.image as any,
+            userId: args.userId as any,
+            id: args.id as any,
+          },
+        });
+      },
+    });
+  },
+});

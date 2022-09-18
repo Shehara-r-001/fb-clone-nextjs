@@ -13,6 +13,11 @@ type Like {
   id: String
 }
 
+type Mutation {
+  createPost(caption: String, id: String, image: String, userId: String): Post!
+  createUser(email: String, id: String, image: String, name: String): User!
+}
+
 type Post {
   author: User
   caption: String
@@ -27,6 +32,7 @@ type Query {
   getAllPosts: [Post]!
   getAllUsers: [User]!
   getPostByID(userId: String!): Post
+  getUserByEmail(email: String!): User
 }
 
 type User {
