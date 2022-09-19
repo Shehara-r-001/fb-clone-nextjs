@@ -22,3 +22,14 @@ export const GetAllPosts = gql`
     }
   }
 `;
+
+export const GetUserByEmail = gql`
+  query GetUserByEmail($email: String!) {
+    getUserByEmail(email: $email) {
+      id
+      name
+      email
+      image
+    }
+  }
+`;

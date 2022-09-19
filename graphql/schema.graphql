@@ -14,8 +14,8 @@ type Like {
 }
 
 type Mutation {
-  createPost(caption: String, id: String, image: String, userId: String): Post!
-  createUser(email: String, id: String, image: String, name: String): User!
+  createPost(caption: String, id: String, image: String, userId: String!): Post!
+  createUser(email: String!, id: String, image: String, name: String!): User!
 }
 
 type Post {

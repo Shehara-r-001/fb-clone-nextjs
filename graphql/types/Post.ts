@@ -84,7 +84,7 @@ export const PostMutation = extendType({
       args: {
         caption: stringArg(),
         image: stringArg(),
-        userId: stringArg(),
+        userId: nonNull(stringArg()),
         id: stringArg(),
       },
       resolve(_parent, args, context) {

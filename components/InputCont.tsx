@@ -1,9 +1,11 @@
 import React, { MouseEvent, useRef, useState } from 'react';
-import { BiUserCircle } from 'react-icons/bi';
 import { ImVideoCamera } from 'react-icons/im';
 import { BsFillEmojiLaughingFill, BsImages } from 'react-icons/bs';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { CreatePostMutation, CreateUserMutation } from '../graphql/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import { GetUserByEmail } from '../graphql/queries';
 
 const placeholder =
   'https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg';
@@ -13,8 +15,79 @@ const InputCont = () => {
   const filePickerRef = useRef<any>();
   const [selectedFile, setSelectedFile] = useState<any>();
   const [caption, setCaption] = useState<string>();
-  const [imgUrl, setImgUrl] = useState<string>();
+  const [imgUrl, setImgUrl] = useState<string>('');
   const captionRef = useRef<any>();
+  const [userExist, setUserExist] = useState<boolean>();
+  const [userID, setUserID] = useState<string>();
+
+  const {
+    data: userData,
+    error: userError,
+    loading: userLoading,
+  } = useQuery(GetUserByEmail, {
+    variables: {
+      email: session?.user.email,
+    },
+    onCompleted: ({ getUserByEmail }) => {
+      console.log(getUserByEmail);
+
+      if (getUserByEmail === null) setUserExist(false);
+      else {
+        setUserExist(true);
+        setUserID(getUserByEmail.id);
+      }
+    },
+  });
+
+  const [createUser] = useMutation(CreateUserMutation);
+
+  const [createPost] = useMutation(CreatePostMutation);
+
+  // search user by email -> if result.length > 0 => get userId
+  // else create new user -> get userId
+
+  const addPost = async () => {
+    console.log('user ->', userExist);
+
+    if (!userExist) {
+      await createUser({
+        variables: {
+          email: session?.user.email,
+          name: session?.user.name,
+          image: session?.user.image,
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+        onCompleted: ({ createUser }) => {
+          console.log(createUser);
+          setUserID(createUser.id);
+        },
+      });
+    }
+
+    console.log('caption ->', caption);
+    console.log('ímgUrl ->', imgUrl);
+    console.log('userId -> ', userID);
+
+    await createPost({
+      variables: {
+        caption: caption,
+        image: imgUrl,
+        userId: userID,
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+      onCompleted: (data) => {
+        console.log(data);
+
+        captionRef.current.value = '';
+        setCaption('');
+        setImgUrl('');
+      },
+    });
+  };
 
   const addImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -38,16 +111,6 @@ const InputCont = () => {
       .then(async (res) => await res.json())
       .then((data) => setImgUrl(data.secure_url))
       .catch((error) => console.log(error));
-  };
-
-  const addPost = () => {
-    console.log(imgUrl);
-    console.log(caption);
-
-    captionRef.current.value = '';
-
-    setCaption('');
-    setImgUrl('');
   };
 
   return (

@@ -47,8 +47,8 @@ export const UsersQuery = extendType({
       args: {
         email: nonNull(stringArg()),
       },
-      resolve(_parent, args, context) {
-        return context.prisma.user.findUnique({
+      async resolve(_parent, args, context) {
+        return await context.prisma.user.findUnique({
           where: {
             email: args.email,
           },
@@ -65,8 +65,8 @@ export const UserMutation = extendType({
       type: 'User',
       args: {
         id: stringArg(),
-        name: stringArg(),
-        email: stringArg(),
+        name: nonNull(stringArg()),
+        email: nonNull(stringArg()),
         image: stringArg(),
       },
       resolve(_parent, args, context) {
