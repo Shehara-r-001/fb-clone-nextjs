@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { CreatePostMutation, CreateUserMutation } from '../graphql/mutations';
 import { useMutation, useQuery } from '@apollo/client';
-import { GetUserByEmail } from '../graphql/queries';
+import { GetAllPosts, GetUserByEmail } from '../graphql/queries';
 
 const placeholder =
   'https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg';
@@ -41,7 +41,9 @@ const InputCont = () => {
 
   const [createUser] = useMutation(CreateUserMutation);
 
-  const [createPost] = useMutation(CreatePostMutation);
+  const [createPost] = useMutation(CreatePostMutation, {
+    refetchQueries: [{ query: GetAllPosts }],
+  });
 
   // search user by email -> if result.length > 0 => get userId
   // else create new user -> get userId

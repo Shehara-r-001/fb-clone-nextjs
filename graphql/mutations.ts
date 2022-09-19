@@ -11,7 +11,10 @@ export const CreatePostMutation = gql`
       id
       caption
       image
-      userId
+      author {
+        id
+      }
+      createdAt
     }
   }
 `;
