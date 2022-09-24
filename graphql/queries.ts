@@ -33,3 +33,18 @@ export const GetUserByEmail = gql`
     }
   }
 `;
+
+export const GetCommentsByPostId = gql`
+  query GetCommentsByPostId($postId: String!) {
+    getCommentsByPostId(postId: $postId) {
+      id
+      desc
+      createdAt
+      author {
+        id
+        name
+        image
+      }
+    }
+  }
+`;

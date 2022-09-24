@@ -19,7 +19,17 @@ const Post = ({ post }: Props) => {
   return (
     <div className='bg-[#1a1a1a] rounded-md my-4 pb-1'>
       <div className='flex items-center px-3 py-2'>
-        <BiUserCircle className='h-8 w-8' />
+        {!!post.author.image ? (
+          <Image
+            src={post.author.image}
+            alt='fb'
+            height={30}
+            width={30}
+            className='header__icon'
+          />
+        ) : (
+          <BiUserCircle className='h-8 w-8' />
+        )}
         <div className='mx-2 flex-1'>
           <h1 className='text-sm font-semibold'>{post.author.name}</h1>
           <div className='flex items-center text-[10px] text-[#ccc] space-x-2'>
@@ -60,7 +70,7 @@ const Post = ({ post }: Props) => {
           </div>
         </div>
       )}
-      <CommentBox />
+      <CommentBox postid={post.id} />
     </div>
   );
 };

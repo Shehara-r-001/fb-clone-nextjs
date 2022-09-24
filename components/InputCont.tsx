@@ -49,7 +49,7 @@ const InputCont = () => {
   // else create new user -> get userId
 
   const addPost = async () => {
-    console.log('user ->', userExist);
+    // console.log('user ->', userExist);
 
     if (!userExist) {
       await createUser({
@@ -68,9 +68,9 @@ const InputCont = () => {
       });
     }
 
-    console.log('caption ->', caption);
-    console.log('ímgUrl ->', imgUrl);
-    console.log('userId -> ', userID);
+    // console.log('caption ->', caption);
+    // console.log('ímgUrl ->', imgUrl);
+    // console.log('userId -> ', userID);
 
     await createPost({
       variables: {

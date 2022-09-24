@@ -36,6 +36,7 @@ interface IComment {
   id: string;
   desc: string;
   createdAt: string;
+  author: IAuthor;
 }
 
 interface ILike {
