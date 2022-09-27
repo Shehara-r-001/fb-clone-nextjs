@@ -34,3 +34,18 @@ export const CreateUserMutation = gql`
     }
   }
 `;
+
+export const CreateCommentMutation = gql`
+  mutation CreateComment($postId: String!, $desc: String!, $userId: String!) {
+    createComment(postId: $postId, desc: $desc, userId: $userId) {
+      id
+      desc
+      createdAt
+      author {
+        id
+        name
+        image
+      }
+    }
+  }
+`;

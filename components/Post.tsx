@@ -9,9 +9,11 @@ import moment from 'moment';
 
 type Props = {
   post: IPost;
+  userExist: boolean | undefined;
+  user: string | undefined;
 };
 
-const Post = ({ post }: Props) => {
+const Post = ({ post, userExist, user }: Props) => {
   const { data: session } = useSession() as any;
 
   var date = new Date(parseInt(post.createdAt)).toISOString();
@@ -70,7 +72,7 @@ const Post = ({ post }: Props) => {
           </div>
         </div>
       )}
-      <CommentBox postid={post.id} />
+      <CommentBox postid={post.id} userExist={userExist} user={user} />
     </div>
   );
 };

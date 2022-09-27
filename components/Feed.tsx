@@ -1,16 +1,37 @@
 import { useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { BsCaretLeft } from 'react-icons/bs';
-import { GetAllPosts } from '../graphql/queries';
+import { GetAllPosts, GetUserByEmail } from '../graphql/queries';
 import InputCont from './InputCont';
 import Post from './Post';
 import Stories from './Stories';
 
 const Feed = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession() as any;
   const router = useRouter();
+  const [userExist, setUserExist] = useState<boolean>();
+  const [userID, setUserID] = useState<string>();
+
+  const {
+    data: userData,
+    error: userError,
+    loading: userLoading,
+  } = useQuery(GetUserByEmail, {
+    variables: {
+      email: session?.user.email,
+    },
+    onCompleted: ({ getUserByEmail }) => {
+      console.log(getUserByEmail);
+
+      if (getUserByEmail === null) setUserExist(false);
+      else {
+        setUserExist(true);
+        setUserID(getUserByEmail.id);
+      }
+    },
+  });
 
   const { data, error, loading } = useQuery(GetAllPosts);
   if (loading) return <h1>loading</h1>;
@@ -21,7 +42,7 @@ const Feed = () => {
       <Stories />
       <div className='px-10 sm:px-3 lg:px-10'>
         {session ? (
-          <InputCont />
+          <InputCont userExist={userExist} user={userID} />
         ) : (
           <div className='border border-red-500 rounded-sm text-center text-sm font-semibold py-2'>
             <h1>You need signin to create posts..!</h1>
@@ -36,7 +57,12 @@ const Feed = () => {
         )}
         {!loading &&
           data?.getAllPosts.map((post: IPost) => (
-            <Post key={post?.id} post={post} />
+            <Post
+              key={post?.id}
+              post={post}
+              userExist={userExist}
+              user={userID}
+            />
           ))}
       </div>
     </div>

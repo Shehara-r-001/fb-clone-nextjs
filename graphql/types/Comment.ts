@@ -44,6 +44,9 @@ export const CommentsQuery = extendType({
           where: {
             postId: args.postId,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         });
       },
     });

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ImVideoCamera } from 'react-icons/im';
 import { BsFillEmojiLaughingFill, BsImages } from 'react-icons/bs';
 import { useSession } from 'next-auth/react';
@@ -10,43 +10,29 @@ import { GetAllPosts, GetUserByEmail } from '../graphql/queries';
 const placeholder =
   'https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg';
 
-const InputCont = () => {
+type Props = {
+  userExist: boolean | undefined;
+  user: string | undefined;
+};
+
+const InputCont = ({ userExist, user }: Props) => {
   const { data: session } = useSession() as any;
   const filePickerRef = useRef<any>();
   const [selectedFile, setSelectedFile] = useState<any>();
   const [caption, setCaption] = useState<string>();
   const [imgUrl, setImgUrl] = useState<string>('');
   const captionRef = useRef<any>();
-  const [userExist, setUserExist] = useState<boolean>();
   const [userID, setUserID] = useState<string>();
 
-  const {
-    data: userData,
-    error: userError,
-    loading: userLoading,
-  } = useQuery(GetUserByEmail, {
-    variables: {
-      email: session?.user.email,
-    },
-    onCompleted: ({ getUserByEmail }) => {
-      console.log(getUserByEmail);
-
-      if (getUserByEmail === null) setUserExist(false);
-      else {
-        setUserExist(true);
-        setUserID(getUserByEmail.id);
-      }
-    },
-  });
+  useEffect(() => {
+    setUserID(user);
+  }, [user]);
 
   const [createUser] = useMutation(CreateUserMutation);
 
   const [createPost] = useMutation(CreatePostMutation, {
     refetchQueries: [{ query: GetAllPosts }],
   });
-
-  // search user by email -> if result.length > 0 => get userId
-  // else create new user -> get userId
 
   const addPost = async () => {
     // console.log('user ->', userExist);

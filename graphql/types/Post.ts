@@ -56,7 +56,11 @@ export const PostsQuery = extendType({
     t.nonNull.list.field('getAllPosts', {
       type: 'Post',
       resolve(_parent, _args, context) {
-        return context.prisma.post.findMany();
+        return context.prisma.post.findMany({
+          orderBy: {
+            createdAt: 'desc',
+          },
+        });
       },
     });
 
