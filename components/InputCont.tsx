@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { CreatePostMutation, CreateUserMutation } from '../graphql/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import { GetAllPosts, GetUserByEmail } from '../graphql/queries';
+import { toast } from 'react-hot-toast';
 
 const placeholder =
   'https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg';
@@ -66,9 +67,11 @@ const InputCont = ({ userExist, user }: Props) => {
       },
       onError: (error) => {
         console.log(error);
+        toast.error('There is an error. Please try again..!');
       },
       onCompleted: (data) => {
         console.log(data);
+        toast.success('Post has been created..');
 
         captionRef.current.value = '';
         setCaption('');

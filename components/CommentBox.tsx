@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import { AiFillCaretDown, AiOutlineGif } from 'react-icons/ai';
 import { BsEmojiSmile, BsCamera } from 'react-icons/bs';
 import {
@@ -71,8 +72,14 @@ const CommentBox = ({ postid, userExist, user }: Props) => {
         desc: newComment,
         userId: userID,
       },
-      onCompleted: (data) => console.log(data),
-      onError: (error) => console.log(error),
+      onCompleted: (data) => {
+        console.log(data);
+        toast.success('Comment has been created..');
+      },
+      onError: (error) => {
+        console.log(error);
+        toast.error('Comment failed..!');
+      },
     });
 
     newCommentRef.current.value = '';
