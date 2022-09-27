@@ -10,10 +10,14 @@ type Comment {
 }
 
 type Like {
+  author: User
+  createdAt: String
   id: String
+  post: Post
 }
 
 type Mutation {
+  createALike(postId: String!, userId: String!): Like
   createComment(desc: String!, postId: String!, userId: String!): Comment!
   createPost(caption: String, id: String, image: String, userId: String!): Post!
   createUser(email: String!, id: String, image: String, name: String!): User!
@@ -33,6 +37,7 @@ type Query {
   getAllPosts: [Post]!
   getAllUsers: [User]!
   getCommentsByPostId(postId: String!): [Comment]
+  getLikesbyPost(postId: String!): [Like]
   getPostByID(userId: String!): [Post]
   getUserByEmail(email: String!): User
 }
