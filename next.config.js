@@ -12,6 +12,7 @@ module.exports = {
       'lh3.googleusercontent.com',
       'www.charitycomms.org.uk',
       'res.cloudinary.com',
+      'simg.nicepng.com',
     ],
   },
 };

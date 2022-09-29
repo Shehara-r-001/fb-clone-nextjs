@@ -62,3 +62,13 @@ export const GetLikesbyPost = gql`
     }
   }
 `;
+
+export const GetAllUsers = gql`
+  query GetAllUsers {
+    getAllUsers {
+      id
+      name
+      image
+    }
+  }
+`;
