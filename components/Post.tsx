@@ -1,11 +1,13 @@
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiUserCircle, BiWorld, BiDotsHorizontalRounded } from 'react-icons/bi';
 import { FaThumbsUp, FaRegThumbsUp, FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import CommentBox from './CommentBox';
 import moment from 'moment';
+import { useQuery } from '@apollo/client';
+import { GetLikesbyPost } from '../graphql/queries';
 
 type Props = {
   post: IPost;
@@ -15,8 +17,26 @@ type Props = {
 
 const Post = ({ post, userExist, user }: Props) => {
   const { data: session } = useSession() as any;
+  const [likes, setLikes] = useState<ILike[]>();
+  const [liked, setLiked] = useState<boolean>();
 
   var date = new Date(parseInt(post.createdAt)).toISOString();
+
+  const { data, error, loading } = useQuery(GetLikesbyPost, {
+    variables: {
+      postId: post?.id,
+    },
+    onCompleted: ({ getLikesbyPost }) => {
+      setLikes(getLikesbyPost);
+      // setLiked(likes?.filter(like => like.author.id === user))
+    },
+    onError: (error) => console.log(error),
+  });
+
+  // useEffect(() => {
+  //   const liked = likes?.filter((like) => like.author.id === user);
+  //   console.log(liked);
+  // }, []);
 
   return (
     <div className='bg-[#1a1a1a] rounded-md my-4 pb-1'>

@@ -48,3 +48,17 @@ export const GetCommentsByPostId = gql`
     }
   }
 `;
+
+export const GetLikesbyPost = gql`
+  query GetLikesbyPost($postId: String!) {
+    getLikesbyPost(postId: $postId) {
+      id
+      post {
+        id
+      }
+      author {
+        id
+      }
+    }
+  }
+`;

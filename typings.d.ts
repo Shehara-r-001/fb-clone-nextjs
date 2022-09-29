@@ -41,4 +41,10 @@ interface IComment {
 
 interface ILike {
   id: string;
+  author: {
+    id;
+  };
+  post: {
+    id;
+  };
 }
