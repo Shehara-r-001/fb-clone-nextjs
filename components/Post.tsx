@@ -8,6 +8,7 @@ import CommentBox from './CommentBox';
 import moment from 'moment';
 import { useQuery } from '@apollo/client';
 import { GetLikesbyPost } from '../graphql/queries';
+import Link from 'next/link';
 
 type Props = {
   post: IPost;
@@ -62,8 +63,14 @@ const Post = ({ post, userExist, user }: Props) => {
         </div>
         <BiDotsHorizontalRounded className='h-5 w-5' />
       </div>
-      <h1 className='px-3 text-sm my-2'>{post.caption}</h1>
-      {post.image && <img src={post.image} className='w-full object-contain' />}
+      <Link href={`/posts/${post.id}`}>
+        <div className='cursor-pointer'>
+          <h1 className='px-3 text-sm my-2'>{post.caption}</h1>
+          {post.image && (
+            <img src={post.image} className='w-full object-contain' />
+          )}
+        </div>
+      </Link>
       <div className='flex items-center justify-between px-2 text-xs py-2'>
         <div className='flex items-center space-x-1'>
           <div className='bg-blue-500 p-1 rounded-full'>

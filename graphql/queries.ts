@@ -72,3 +72,33 @@ export const GetAllUsers = gql`
     }
   }
 `;
+
+export const GetPostByPostID = gql`
+  query GetPostByPostID($postId: String!) {
+    getPostByPostID(postId: $postId) {
+      id
+      caption
+      image
+      createdAt
+      author {
+        id
+        name
+        image
+      }
+      comments {
+        id
+        desc
+        createdAt
+        author {
+          name
+        }
+      }
+      likes {
+        id
+        author {
+          id
+        }
+      }
+    }
+  }
+`;

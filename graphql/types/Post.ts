@@ -77,6 +77,20 @@ export const PostsQuery = extendType({
         });
       },
     });
+
+    t.field('getPostByPostID', {
+      type: 'Post',
+      args: {
+        postId: nonNull(stringArg()),
+      },
+      resolve(_parent, args, context) {
+        return context.prisma.post.findFirst({
+          where: {
+            id: args.postId,
+          },
+        });
+      },
+    });
   },
 });
 

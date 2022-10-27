@@ -39,6 +39,7 @@ type Query {
   getCommentsByPostId(postId: String!): [Comment]
   getLikesbyPost(postId: String!): [Like]
   getPostByID(userId: String!): [Post]
+  getPostByPostID(postId: String!): Post
   getUserByEmail(email: String!): User
 }
 
