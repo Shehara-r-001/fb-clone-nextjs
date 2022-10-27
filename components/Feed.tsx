@@ -23,7 +23,7 @@ const Feed = () => {
       email: session?.user.email,
     },
     onCompleted: ({ getUserByEmail }) => {
-      console.log(getUserByEmail);
+      // console.log(getUserByEmail);
 
       if (getUserByEmail === null) setUserExist(false);
       else {

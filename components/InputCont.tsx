@@ -49,7 +49,7 @@ const InputCont = ({ userExist, user }: Props) => {
           console.log(error);
         },
         onCompleted: ({ createUser }) => {
-          console.log(createUser);
+          // console.log(createUser);
           setUserID(createUser.id);
         },
       });
@@ -66,11 +66,11 @@ const InputCont = ({ userExist, user }: Props) => {
         userId: userID,
       },
       onError: (error) => {
-        console.log(error);
+        // console.log(error);
         toast.error('There is an error. Please try again..!');
       },
       onCompleted: (data) => {
-        console.log(data);
+        // console.log(data);
         toast.success('Post has been created..');
 
         captionRef.current.value = '';
